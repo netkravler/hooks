@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { StageCard } from "./Components/Cards/StageCard";
+import { useGetListByEndpointData } from "./Hooks/useGetListByEndpointData";
 
 function App() {
+  const { state: stages } = useGetListByEndpointData("stages");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ul>
+      {stages
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3)
+        .map((item) => (
+          <StageCard item={item} key={item.id} />
+        ))}
+    </ul>
   );
 }
 
